@@ -1,0 +1,17 @@
+{
+  "platformType": "uplay",
+  "ticket": "ticket",
+  "twoFactorAuthenticationTicket": null,
+  "profileId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "userId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "nameOnPlatform": "Fleshdeity",
+  "environment": "Prod",
+  "expiration": "2023-02-09T17:17:44.4968077Z",
+  "spaceId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab",
+  "clientIp": "127.0.0.1",
+  "clientIpCountry": "RU",
+  "serverTime": "2023-02-09T14:17:44.5029878Z",
+  "sessionId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaac",
+  "sessionKey": "sessionkey",
+  "rememberMeTicket": null
+}

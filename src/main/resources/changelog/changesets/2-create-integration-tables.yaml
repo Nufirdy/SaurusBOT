@@ -1,0 +1,119 @@
+databaseChangeLog:
+  - changeSet:
+      id: create telegram_chat
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: chat_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: telegram_chat_pkey
+                  name: id
+                  type: BIGINT
+            tableName: telegram_chat
+  - changeSet:
+      id: create unique constraint on chat_id
+      author: Kirill Gnilov
+      changes:
+        - addUniqueConstraint:
+            columnNames: chat_id
+            constraintName: chat_id_uk
+            tableName: telegram_chat
+  - changeSet:
+      id: create subscribers
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: subscribers_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: is_private
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: locale
+                  type: VARCHAR(255)
+            tableName: subscribers
+  - changeSet:
+      id: autoincrement subscriber id
+      author: Kirill Gnilov
+      changes:
+        - addAutoIncrement:
+            columnName: id
+            columnDataType: BIGINT
+            tableName: subscribers
+            generationType: IDENTITY
+            incrementBy: 1
+            startWith: 100
+  - changeSet:
+      id: create subscriptions
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: subscriptions_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: subscriptions_pkey
+                  name: subscription_type
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enabled
+                  type: BOOLEAN
+            tableName: subscriptions
+  - changeSet:
+      id: create telegram_chat-subscribers_fk
+      author: Kirill Gnilov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id
+            baseTableName: telegram_chat
+            constraintName: telegram_chat-subscribers_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: subscribers
+            validate: true
+  - changeSet:
+      id: create subscriptions-subscribers_fk
+      author: Kirill Gnilov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id
+            baseTableName: subscriptions
+            constraintName: subscriptions-subscribers_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: subscribers
+            validate: true

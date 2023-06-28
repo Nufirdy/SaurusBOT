@@ -1,0 +1,357 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_campaign_media
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: button_background_url
+                  type: VARCHAR(255)
+              - column:
+                  name: button_foreground_url
+                  type: VARCHAR(255)
+              - column:
+                  name: decal_url
+                  type: VARCHAR(255)
+              - column:
+                  name: live_button_background_url
+                  type: VARCHAR(255)
+              - column:
+                  name: live_button_foreground_url
+                  type: VARCHAR(255)
+              - column:
+                  name: pop_up_background_url
+                  type: VARCHAR(255)
+              - column:
+                  name: pop_up_image_url
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: campaign_media_pkey
+                  name: campaign_id
+                  type: BIGINT
+            tableName: campaign_media
+  - changeSet:
+      id: create_campaign
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: campaigns_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: club_id
+                  type: INTEGER
+              - column:
+                  name: color
+                  type: VARCHAR(255)
+              - column:
+                  name: edition_timestamp
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: end_timestamp
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: leaderboard_group_uid
+                  type: UUID
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: publication_timestamp
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: published
+                  type: BOOLEAN
+              - column:
+                  name: ranking_sent_timestamp
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: season_uid
+                  type: UUID
+              - column:
+                  name: start_timestamp
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: use_case
+                  type: INTEGER
+            tableName: campaigns
+  - changeSet:
+      id: create_map_info
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: map_info_pkey
+                  name: id
+                  type: UUID
+              - column:
+                  name: author
+                  type: UUID
+              - column:
+                  name: author_time
+                  type: INTEGER
+              - column:
+                  name: bronze_time
+                  type: INTEGER
+              - column:
+                  name: collection_name
+                  type: VARCHAR(255)
+              - column:
+                  name: download_url
+                  type: VARCHAR(255)
+              - column:
+                  name: file_size
+                  type: VARCHAR(255)
+              - column:
+                  name: gold_time
+                  type: INTEGER
+              - column:
+                  name: map_style
+                  type: VARCHAR(255)
+              - column:
+                  name: map_type
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: nb_laps
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: playable
+                  type: BOOLEAN
+              - column:
+                  name: public
+                  type: BOOLEAN
+              - column:
+                  name: silver_time
+                  type: INTEGER
+              - column:
+                  name: submitter
+                  type: UUID
+              - column:
+                  name: thumbnail_url
+                  type: VARCHAR(255)
+              - column:
+                  name: uid
+                  type: VARCHAR(255)
+              - column:
+                  name: update_timestamp
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: upload_timestamp
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: valid
+                  type: BOOLEAN
+              - column:
+                  name: campaign_id
+                  type: BIGINT
+            tableName: map_info
+  - changeSet:
+      id: create_map_record
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: map_record_pkey
+                  name: id
+                  type: UUID
+              - column:
+                  name: account_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: filename
+                  type: VARCHAR(255)
+              - column:
+                  name: medal
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: removed
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: respawn_count
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: score
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: time
+                  type: INTEGER
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: url
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: map_info_id
+                  type: UUID
+            tableName: map_record
+  - changeSet:
+      id: create player_accounts
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: player_account_pkey
+                  name: id
+                  type: UUID
+              - column:
+                  name: display_name
+                  type: VARCHAR(255)
+            tableName: player_accounts
+  - changeSet:
+      id: create_tracked_map
+      author: Kirill Gnilov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tracked_map_pkey
+                  name: map_info_id
+                  type: UUID
+            tableName: tracked_map
+  - changeSet:
+      id: map_record_to_map_info_fk
+      author: Kirill Gnilov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: map_info_id
+            baseTableName: map_record
+            constraintName: map_record-map_info_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: map_info
+            validate: true
+  - changeSet:
+      id: map_info_to_campaign_fk
+      author: Kirill Gnilov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: campaign_id
+            baseTableName: map_info
+            constraintName: map_info-campaign_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: campaigns
+            validate: true
+  - changeSet:
+      id: campaign_media_to_campaign_fk
+      author: Kirill Gnilov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: campaign_id
+            baseTableName: campaign_media
+            constraintName: campaign_media-campaign_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: campaigns
+            validate: true
+  - changeSet:
+      id: tracked_map_to_map_info_fk
+      author: Kirill Gnilov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: map_info_id
+            baseTableName: tracked_map
+            constraintName: tracked_map-map_info_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: map_info
+            validate: true
+  - changeSet:
+      id: map_info to player_accounts fk
+      author: Kirill Gnilov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: author
+            baseTableName: map_info
+            constraintName: map_info_author-player_account_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: player_accounts
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: submitter
+            baseTableName: map_info
+            constraintName: map_info_submitter-player_account_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: player_accounts
+            validate: true
+  - changeSet:
+      id: map_record to player_accounts fk
+      author: Kirill Gnilov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: account_id
+            baseTableName: map_record
+            constraintName: map_record-player_account_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: player_accounts
+            validate: true

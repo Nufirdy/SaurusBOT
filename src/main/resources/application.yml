@@ -1,0 +1,70 @@
+saurus:
+  module:
+    core:
+      disabled: true
+nadeo:
+  service:
+    core: https://prod.trackmania.core.nadeo.online
+    live: https://live-services.trackmania.nadeo.live
+    api: https://api.trackmania.com
+  security:
+    refresh-token-endpoint: /v2/authentication/token/refresh
+
+telegram:
+  bot:
+    token: "6165027271:AAHsENyV8s61m7Z99qZNu11WQsXBo-6QmE4" #TODO убрать токены перед пушем
+    username: "SaurusTMBot"
+
+discord:
+  bot:
+    token: ""
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test-saurus
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        event:
+          merge:
+            entity_copy_observer: allow
+#        format_sql: true #
+#    show-sql: true #
+  security:
+    oauth2:
+      client:
+        registration:
+          tm-api:
+            authorization-grant-type: client_credentials
+            client-authentication-method: client_secret_post
+            client-id: 238b75dbee0fa4d96b56
+            client-secret: bc57a3e0db1c378fe26295daac75e4c1f29b3f23
+          NadeoServices:
+            client-id: Zavod727
+            client-secret: udo4uAW8!R;vC11b
+            authorization-grant-type: client_credentials #doesn't affect provider selection
+          NadeoLiveServices:
+            client-id: Zavod727
+            client-secret: udo4uAW8!R;vC11b
+            authorization-grant-type: client_credentials #doesn't affect provider selection
+        provider:
+          tm-api:
+            token-uri: https://api.trackmania.com/api/access_token
+          NadeoServices:
+            token-uri: https://prod.trackmania.core.nadeo.online/v2/authentication/token/basic
+          NadeoLiveServices:
+            token-uri: https://prod.trackmania.core.nadeo.online/v2/authentication/token/basic
+
+  liquibase:
+    change-log: classpath:changelog/changelog-master.yml
+#    enabled: false
+
+logging:
+  level:
+    root: info
